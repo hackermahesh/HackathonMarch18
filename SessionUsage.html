@@ -1,0 +1,38 @@
+<!DOCTYPE>
+<html>
+<head>
+<script src="js/canvasjs.min.js"></script>
+<script type="text/javascript">
+
+window.onload = function () {
+	var chart = new CanvasJS.Chart("chartContainer", {
+		title:{
+			text: "Session Usage"   
+       		
+		},
+		animationEnabled: true,
+		indexLabelFontFamily: "Garamond",
+       indexLabelFontColor: "darkgrey",	
+		data: [              
+		{
+			// Change type to "doughnut", "line", "splineArea", etc.
+			type: "line",
+			dataPoints: [
+				{ label: "login",  y: 0  },
+				{ label: "Browse catalog", y: 2  },
+				{ label: "Form Data", y: 10  },
+				{ label: "Checkout",indexLabel: "Error Encountered.Click for details", markerColor: "red", markerType: "triangle", y: 17  },
+                { label: "Submit Request"  },
+				{ label: "logout" }
+			],
+		}
+		]
+	});
+	chart.render();
+}
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 100%; width: 100%;"></div>
+</body>
+</html>

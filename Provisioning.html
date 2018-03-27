@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script src="js/canvasjs.min.js"></script>
+<script type="text/javascript">
+
+window.onload = function () {
+	var chart = new CanvasJS.Chart("chartContainer", {
+		title:{
+			text: "Provisioning"              
+		},
+		animationEnabled: true,
+	   indexLabelFontSize: 20,
+       indexLabelFontFamily: "Garamond",
+       indexLabelFontColor: "darkgrey",
+       indexLabelLineColor: "darkgrey",
+       indexLabelPlacement: "outside",
+		data: [              
+		{
+			// Change type to "doughnut", "line", "splineArea", etc.
+			type: "doughnut",
+			dataPoints: [
+				{ y: 10, legendText:"Bulk Import Existing Services",indexLabel:"Bulk Import Existing Services (10%)"},
+				{ y: 15, legendText:"Compute Service powered by Cloud Optimizer",indexLabel:"Compute Service powered by Cloud Optimizer (15%)"},
+				{ y: 25, legendText:"MOE Infrastructure Compute",indexLabel:"MOE Infrastructure Compute (25%)"},
+				{ y: 33, legendText:"OpenStack Compute with Storage using Component Palette",indexLabel:"OpenStack Compute with Storage using Component Palette (33%)"},
+				{ y: 07, legendText:"OPS Analytics Log Collection on vCenter",indexLabel:"OPS Analytics Log Collection on vCenter (07%)"},
+				{ y: 10, legendText:"vCenter Compute - SIU ",indexLabel:"vCenter Compute - SIU (10%) "},
+				
+				
+			]
+		}
+		]
+	});
+	chart.render();
+}
+</script>
+</head>
+<body >
+<div id="chartContainer" style="height: 100%; width: 100%"></div>
+</body>
+</html>

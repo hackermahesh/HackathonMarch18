@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<script src="js/d3.v3.min.js"></script>
+<script src="js/d3.layout.cloud.js"></script>
+<script src="js/canvasjs.min.js"></script>
+
+<head>
+<title>HCM Cloud words</title>
+</head>
+
+<style>
+body {
+	font-family: "Lucida Grande","Droid Sans",Arial,Helvetica,sans-serif;
+}
+.legend {
+	border: 1px solid #555555;
+	border-radius: 5px 5px 5px 5px;
+	font-size: 0.8em;
+	margin: 10px;
+	padding: 8px;
+}
+.bld {
+	font-weight: bold;
+}
+</style>
+
+<body>
+
+</body>
+<script>
+
+    var frequency_list = [{"text":"Cloud Transformation","size":13},
+{"text":"Cloud Analytics","size":15},
+{"text":"Cloud Monitoring","size":14},
+{"text":"Cloud storage","size":15},
+{"text":"Operation Orchestration","size":15},
+{"text":"Hybrid Cloud","size":15},
+{"text":"On-demand service","size":12},
+{"text":"Customer self-service","size":13},
+{"text":"Cloud Optimizer","size":14},
+{"text":"UCMDB","size":16},
+{"text":"IaaS","size":16},
+{"text":"NaaS","size":16},
+{"text":"PaaS","size":16},
+{"text":"SaaS","size":16},
+{"text":"Service migration","size":14},
+{"text":"Server Automation","size":14}	
+	];
+
+
+    var color = d3.scale.linear()
+            .domain([0,1,2,3,4,5,6,10,15,20,100])
+            .range(["#1B0F9B", "#0F569B", "#0F229B", "#2B0F9B", "#0F539B", "#0F439B", "#0F469B", "#0F3A9B", "#0F139B","#0F2F9B", "#280F9B", "#1B0F9B"]);
+
+    d3.layout.cloud().size([300, 300])
+            .words(frequency_list)
+            .rotate(0)
+            .fontSize(function(d) { return d.size; })
+            .on("end", draw)
+            .start();
+
+    function draw(words) {
+        d3.select("body").append("svg")
+                .attr("width", 300)
+                .attr("height", 300)
+                .attr("class", "wordcloud")
+                .append("g")
+                // without the transform, words words would get cutoff to the left and top, they would
+                // appear outside of the SVG area
+                .attr("transform", "translate(110,200)")
+                .selectAll("text")
+                .data(words)
+                .enter().append("text")
+                .style("font-size", function(d) { return d.size + "px"; })
+                .style("fill", function(d, i) { return color(i); })
+                .attr("transform", function(d) {
+                    return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                })
+                .text(function(d) { return d.text; });
+    }
+</script>
+
+</html>
